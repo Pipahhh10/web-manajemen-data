@@ -24,6 +24,12 @@
                 </div>
             </div>
         </div>
+            <!-- Add this inside your header section after the logo -->
+        <div style="position: absolute; top: 20px; right: 20px;">
+            <button class="btn btn-sm btn-outline" onclick="logout()" style="color: white; border-color: white;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
     </header>
 
     <div class="container">
@@ -260,6 +266,38 @@
             </div>
         </div>
     </div>
+    <!-- Add this at the VERY TOP of your index.html body -->
+<script>
+    // Check if user is logged in
+    const loginState = localStorage.getItem("campus_sync_login_state");
+    
+    if (!loginState) {
+        // Redirect to login page
+        window.location.href = "login.html";
+    } else {
+        // Verify token is still valid
+        try {
+            const state = JSON.parse(loginState);
+            const now = new Date().getTime();
+            
+            if (state.timestamp && (now - state.timestamp > 24 * 60 * 60 * 1000)) {
+                // Token expired
+                localStorage.removeItem("campus_sync_login_state");
+                window.location.href = "login.html";
+            }
+        } catch (error) {
+            // Invalid token
+            localStorage.removeItem("campus_sync_login_state");
+            window.location.href = "login.html";
+        }
+    }
+    
+    // Add logout function to your existing JS
+    function logout() {
+        localStorage.removeItem("campus_sync_login_state");
+        window.location.href = "login.html";
+    }
+</script>
 
     <!-- JAVASCRIPT -->
     <script src="webkuh.js"></script>
