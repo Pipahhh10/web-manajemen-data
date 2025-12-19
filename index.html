@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 CampusSync - Manajemen Data Mahasiswa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="webkuh.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h1>CampusSync</h1>
+                        <p class="subtitle">Sistem Manajemen Data Mahasiswa Modern</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- STATS SECTION -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-1">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-number" id="totalStudents">0</div>
+                <div class="stat-label">Total Mahasiswa</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-2">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-number" id="highestGPA">0.00</div>
+                <div class="stat-label">IPK Tertinggi</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-3">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="stat-number" id="totalMajors">0</div>
+                <div class="stat-label">Jurusan</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon stat-icon-4">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="stat-number" id="averageGPA">0.00</div>
+                <div class="stat-label">Rata-rata IPK</div>
+            </div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- INPUT CARD -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>Input Data Mahasiswa</h3>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="nim"><i class="fas fa-id-card"></i> NIM</label>
+                        <i class="fas fa-hashtag input-icon"></i>
+                        <input type="text" id="nim" placeholder="Contoh: 202310001" maxlength="10">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="nama"><i class="fas fa-user"></i> Nama Lengkap</label>
+                        <i class="fas fa-user-circle input-icon"></i>
+                        <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="jurusan"><i class="fas fa-graduation-cap"></i> Jurusan</label>
+                        <i class="fas fa-book input-icon"></i>
+                        <select id="jurusan">
+                            <option value="">Pilih Jurusan</option>
+                            <option value="Teknik Informatika">Teknik Informatika</option>
+                            <option value="Sistem Informasi">Sistem Informasi</option>
+                            <option value="Teknik Komputer">Teknik Komputer</option>
+                            <option value="Data Science">Data Science</option>
+                            <option value="Bisnis Digital">Bisnis Digital</option>
+                            <option value="Akuntansi">Akuntansi</option>
+                            <option value="Manajemen">Manajemen</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="ipk"><i class="fas fa-star"></i> IPK</label>
+                        <i class="fas fa-chart-bar input-icon"></i>
+                        <input type="number" id="ipk" step="0.01" min="0" max="4" placeholder="0.00 - 4.00">
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="btnTambah">
+                        <i class="fas fa-plus"></i> Tambah Data
+                    </button>
+                    <button class="btn btn-secondary" id="btnReset">
+                        <i class="fas fa-redo"></i> Reset Form
+                    </button>
+                </div>
+            </div>
+
+            <!-- SEARCH & SORT CARD -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-search"></i>
+                    <h3>Pencarian & Sorting</h3>
+                </div>
+                
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="keyword"><i class="fas fa-search"></i> Kata Kunci</label>
+                        <i class="fas fa-keyboard input-icon"></i>
+                        <input type="text" id="keyword" placeholder="Cari berdasarkan NIM atau Nama">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="sortField"><i class="fas fa-sort-amount-down"></i> Urutkan Berdasarkan</label>
+                        <i class="fas fa-sort input-icon"></i>
+                        <select id="sortField">
+                            <option value="nim">NIM</option>
+                            <option value="nama">Nama</option>
+                            <option value="jurusan">Jurusan</option>
+                            <option value="ipk">IPK</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="sortOrder"><i class="fas fa-sort"></i> Urutan</label>
+                        <i class="fas fa-arrow-up input-icon"></i>
+                        <select id="sortOrder">
+                            <option value="asc">Naik (A-Z)</option>
+                            <option value="desc">Turun (Z-A)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="sortAlgorithm"><i class="fas fa-cogs"></i> Algoritma</label>
+                        <i class="fas fa-code input-icon"></i>
+                        <select id="sortAlgorithm">
+                            <option value="bubble">Bubble Sort</option>
+                            <option value="selection">Selection Sort</option>
+                            <option value="insertion">Insertion Sort</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="btnSearch">
+                        <i class="fas fa-search"></i> Cari Data
+                    </button>
+                    <button class="btn btn-success" id="btnSort">
+                        <i class="fas fa-sort-amount-down"></i> Urutkan Data
+                    </button>
+                    <button class="btn btn-outline" id="btnResetFilter">
+                        <i class="fas fa-times"></i> Reset Filter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABLE SECTION -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-table"></i>
+                <h3>Data Mahasiswa</h3>
+                <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
+                    <span class="badge badge-success" id="displayCount">0 data ditampilkan</span>
+                    <button class="btn btn-sm btn-secondary" id="btnExport">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="index">No</th>
+                            <th class="sortable" data-sort="nim"><i class="fas fa-id-card"></i> NIM</th>
+                            <th class="sortable" data-sort="nama"><i class="fas fa-user"></i> Nama</th>
+                            <th class="sortable" data-sort="jurusan"><i class="fas fa-graduation-cap"></i> Jurusan</th>
+                            <th class="sortable" data-sort="ipk"><i class="fas fa-star"></i> IPK</th>
+                            <th><i class="fas fa-chart-line"></i> Status</th>
+                            <th><i class="fas fa-cogs"></i> Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data akan dimuat di sini -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="text-center mt-3" id="noDataMessage">
+                <i class="fas fa-database" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 15px;"></i>
+                <h3 style="color: #94a3b8;">Belum Ada Data</h3>
+                <p style="color: #94a3b8;">Mulai dengan menambahkan data mahasiswa pertama Anda!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo" style="justify-content: center; margin-bottom: 20px;">
+                    <div class="logo-icon" style="background: rgba(255, 255, 255, 0.1); width: 50px; height: 50px;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h3 style="color: white; font-size: 1.5rem;">CampusSync</h3>
+                    </div>
+                </div>
+                
+                <p style="color: #cbd5e1; max-width: 600px; margin: 0 auto 20px;">
+                    Sistem manajemen data mahasiswa modern dengan fitur lengkap untuk kebutuhan akademik.
+                </p>
+                
+                <div class="footer-links">
+                    <a href="#"><i class="fas fa-info-circle"></i> Tentang</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Bantuan</a>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Privasi</a>
+                    <a href="#"><i class="fas fa-envelope"></i> Kontak</a>
+                </div>
+                
+                <div class="copyright">
+                    &copy; 2025 CampusSync. All rights reserved. | Dibuat dengan hati <i class="fas fa-heart" style="color: #ef4444;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- MODAL EDIT -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Edit Data Mahasiswa</h3>
+                <button class="modal-close" id="btnCloseModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="editFormContent">
+                <!-- Form edit akan dimuat di sini -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="webkuh.js"></script>
+</body>
+</html>
